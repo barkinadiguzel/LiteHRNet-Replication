@@ -84,7 +84,6 @@ LiteHRNet-Replication/
 │   │
 │   ├── modules/
 │   │   ├── hrnet_stage.py
-│   │   ├── multi_resolution_unit.py
 │   │   └── weight_generator.py
 │   │
 │   ├── model/
