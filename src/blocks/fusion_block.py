@@ -1,14 +1,18 @@
-import torch.nn as nn
 import torch.nn.functional as F
 
-class FusionBlock(nn.Module):
+class FusionBlock:
     def forward(self, xs):
-        out = []
+
         target_h, target_w = xs[0].shape[2:]
 
+        resized = []
         for x in xs:
             if x.shape[2:] != (target_h, target_w):
-                x = F.interpolate(x, size=(target_h, target_w), mode="bilinear", align_corners=False)
-            out.append(x)
+                x = F.interpolate(x, size=(target_h, target_w),
+                                  mode="bilinear",
+                                  align_corners=False)
+            resized.append(x)
 
-        return [sum(out)]
+        fused = sum(resized)
+
+        return [fused for _ in xs]
